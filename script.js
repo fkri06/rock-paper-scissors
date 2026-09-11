@@ -1,6 +1,3 @@
-let humanScore = 0;
-let computerScore = 0;
-
 function getComputerChoice () {
     const getRandomValue = Math.floor(Math.random() * 3);
     switch (getRandomValue) {
@@ -20,20 +17,37 @@ function getHumanChoice () {
     return humanChoice.toLowerCase();
 } 
 
-function playRound (humanChoice, computerChoice) {
-    if (humanChoice === computerChoice) {
-        console.log("Ties.");
-    } else if ((humanChoice === "paper" && computerChoice === "rock") || 
+
+function playGame() {
+    let humanScore = 0;
+    let computerScore = 0;
+
+
+    let round = 5;
+
+    while (round !== 0) {
+        const humanChoice = getHumanChoice();
+        const computerChoice = getComputerChoice();
+        
+        if (humanChoice === computerChoice) {
+            console.log("Ties.");
+        } else if ((humanChoice === "paper" && computerChoice === "rock") || 
          (humanChoice === "rock" && computerChoice === "scissors") ||
          (humanChoice === "scissors" && computerChoice === "paper")) 
-    {
-        console.log (`You win! ${humanChoice} beats ${computerChoice}.`);
-    } else {
-        console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
+        {
+            console.log (`You win! ${humanChoice} beats ${computerChoice}.`);
+            humanScore++;
+        } else {
+            console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
+            computerScore++;
+        }
+        round--;
     }
+
+    console.log("Final score: ");
+    console.log(`Human: ${humanScore}`);
+    console.log(`Computer: ${computerScore}`);
+
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
-
-playRound(humanSelection, computerSelection);
+playGame();
